@@ -21,7 +21,7 @@ static int	ft_return_cnt(char c, int num, unsigned long unum)
 			n++;
 		}
 		else
-		unum = num;
+			unum = num;
 	}
 	while (unum > (base - 1))
 	{
@@ -33,7 +33,7 @@ static int	ft_return_cnt(char c, int num, unsigned long unum)
 
 static int	ft_ifprint_pnt(char c, va_list args)
 {
-	char		*str;
+	char			*str;
 	unsigned long	unum;
 
 	if (c == 's')
@@ -62,7 +62,7 @@ static int	ft_ifprint_pnt(char c, va_list args)
 
 static int	ft_ifprint_num(char c, va_list args)
 {
-	int		num;
+	int				num;
 	unsigned long	unum;
 
 	unum = 0;
@@ -111,7 +111,7 @@ int	ft_printf(const char *s, ...)
 	size_t		cnt;
 	va_list		args;
 	char		c;
-	int		n;
+	int			n;
 
 	n = 0;
 	cnt = 0;

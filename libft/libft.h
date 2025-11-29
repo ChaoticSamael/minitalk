@@ -69,8 +69,8 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 //printf
-void	ft_putuns(unsigned nbr);
-void	ft_putnbr_base(unsigned nbr, char *d);
+void	ft_putuns(unsigned int nbr);
+void	ft_putnbr_base(unsigned int nbr, char *d);
 void	ft_putnbr_long_base(unsigned long nbr, char *d);
 int		ft_printf(const char *s, ...);
 

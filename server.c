@@ -1,55 +1,55 @@
 #include "minitalk.h"
 
+void	print_msg(t_sig *sig)
+{
+	sig->msg_buff[sig->msg_cnt] = 0;
+	ft_printf("%s\n", sig->msg_buff);
+	free(sig->msg_buff);
+	sig->size = 0;
+	sig->size_buff = 0;
+	sig->mini_buff = 0;
+	sig->cnt = 0;
+	sig->msg_cnt = 0;
+}
+
+void	save_msg(t_sig *sig)
+{
+	sig->msg_buff[sig->msg_cnt] = sig->mini_buff;
+	sig->msg_cnt++;
+	sig->mini_buff = 0;
+	sig->cnt = 0;
+}
+
 void	sig_manager(int signal_received)
 {
-	static int	cnt;
-	static int	size;
-	static int	msg_cnt;
-	static int	size_buff;
-	static unsigned char mini_buff;
-	char	*msg_buff;
+	static t_sig	sig;
 
-	cnt++;
-	if (size != 0)
+	sig.cnt++;
+	if (sig.size != 0)
 	{
-		mini_buff <<= 1;
-		mini_buff |= (signal_received == SIGUSR1);
+		sig.mini_buff <<= 1;
+		sig.mini_buff |= (signal_received == SIGUSR1);
 	}
 	else
 	{
-		size_buff<<= 1;
-		size_buff |= (signal_received == SIGUSR1);
+		sig.size_buff <<= 1;
+		sig.size_buff |= (signal_received == SIGUSR1);
 	}
-	if (cnt == 32 && size == 0)
+	if (sig.cnt == 32 && sig.size == 0)
 	{
-		size = size_buff;
-		msg_buff = malloc(size * sizeof(char));
-		cnt = 0;
+		sig.size = sig.size_buff;
+		sig.msg_buff = malloc(sig.size * sizeof(char));
+		sig.cnt = 0;
 	}
-	if (cnt == 8 && mini_buff == 4)
-	{
-		msg_buff[msg_cnt] = 0;
-		ft_printf("%s\n", msg_buff);
-		free(msg_buff);
-		size = 0;
-		size_buff = 0;
-		mini_buff = 0;
-		cnt = 0;
-		msg_cnt = 0;
-	}
-	else if (cnt == 8 && size != 0)
-	{
-		msg_buff[msg_cnt] = mini_buff;
-		msg_cnt++;
-		mini_buff = 0;
-		cnt = 0;
-	}
+	if (sig.cnt == 8 && sig.mini_buff == 4)
+		print_msg(&sig);
+	else if (sig.cnt == 8 && sig.size != 0)
+		save_msg(&sig);
 }
 
 int	main(void)
 {
 	printf("server pid=%d\n", getpid());
-
 	signal(SIGUSR2, sig_manager);
 	signal(SIGUSR1, sig_manager);
 	while (42)

@@ -4,7 +4,7 @@ int	ft_isnum(char *s)
 {
 	while (s)
 	{
-		if (!(*s <= 48 && *s <= 57 ))
+		if (!(*s <= 48 && *s <= 57))
 			return (1);
 		s++;
 	}

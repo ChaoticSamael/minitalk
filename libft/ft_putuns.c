@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-void	ft_putuns(unsigned nbr)
+void	ft_putuns(unsigned int nbr)
 {
 	char	c;
 

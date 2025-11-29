@@ -8,6 +8,16 @@
 # include <stdbool.h>
 # include "libft/libft.h"
 
+typedef struct s_sig
+{
+	int				cnt;
+	int				size;
+	int				msg_cnt;
+	int				size_buff;
+	unsigned char	mini_buff;
+	char			*msg_buff;
+}					t_sig;
+
 //server
 int		ft_isnum(char *s);
 void	turn_n_send(int pid, unsigned char c);

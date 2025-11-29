@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "libft.h"
 
-void	ft_putnbr_base(unsigned nbr, char *d)
+void	ft_putnbr_base(unsigned int nbr, char *d)
 {
 	char	c;
 
